@@ -70,13 +70,30 @@ class ParallelMergeSort extends RecursiveTask<int[]>{
   public static void main(String [] args){
     ParallelMergeSort pms = new ParallelMergeSort(new int[0]);
     pms.randomArrayandMerge(1);
+
+
+
     pms.randomArrayandMerge(10);
-    pms.randomArrayandMerge(100);
-    pms.randomArrayandMerge(1000);
-    pms.randomArrayandMerge(10000);
-    pms.randomArrayandMerge(100000);
-    pms.randomArrayandMerge(1000000);
-    pms.randomArrayandMerge(10000000);
-    pms.randomArrayandMerge(100000000);
+    pms.randomArrayandMerge(20);
+    pms.randomArrayandMerge(40);
+    pms.randomArrayandMerge(80);
+    pms.randomArrayandMerge(160);
+    pms.randomArrayandMerge(320);
+    pms.randomArrayandMerge(640);
+    pms.randomArrayandMerge(1280);
+    pms.randomArrayandMerge(2560);
+    pms.randomArrayandMerge(5120);
+    pms.randomArrayandMerge(10240);
+    pms.randomArrayandMerge(20480);
+    pms.randomArrayandMerge(40960);
+    pms.randomArrayandMerge(81920);
+    pms.randomArrayandMerge(163840);
+    pms.randomArrayandMerge(327680);
+    pms.randomArrayandMerge(655360);
+    pms.randomArrayandMerge(1310720);
+    pms.randomArrayandMerge(2621440);
+    pms.randomArrayandMerge(5242880);
+    pms.randomArrayandMerge(10485760);
+
   }
 }
