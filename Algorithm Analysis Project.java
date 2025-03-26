@@ -11,7 +11,7 @@ class ParallelMergeSort extends RecursiveTask<int[]>{
   }
 @Override
   protected int [] compute(){
-    if(myArray.length <= 16) {
+    if(myArray.length <= 1000) {
       Arrays.sort(myArray);
       return myArray;
     }
@@ -33,7 +33,7 @@ class ParallelMergeSort extends RecursiveTask<int[]>{
   {
     int [] merged = new int [left.length + right.length];
     int i = 0, j = 0, k = 0;
-
+    
   while (i < left.length && j < right.length) {
             merged[k++] = (left[i] < right[j]) ? left[i++] : right[j++];
         }
@@ -43,24 +43,40 @@ class ParallelMergeSort extends RecursiveTask<int[]>{
 
         return merged;
     }
+  
+  public void randomArrayandMerge(int size){
+    int[] randomArray = new int[size]; // Create an array of the specified size
+    Random random = new Random();
 
-  public static void main(String [] args){
-    int [] myArray = {3, 6, 8, 10, 1, 2, 1};
-    int size = 100000; // Define the size of the array
-        int[] randomArray = new int[size]; // Create an array of the specified size
-        Random random = new Random();
-// Fill the array with random integers
-        for (int i = 0; i < size; i++) {
-            randomArray[i] = random.nextInt(100); // Generates random integers between 0 (inclusive) and 100 (exclusive)
-        }
+    // Fill the array with random integers
+    for (int i = 0; i < size; i++) {
+        randomArray[i] = random.nextInt(100000); // Generates random integers between 0 (inclusive) and 100 (exclusive)
+    }
     long startTime = System.nanoTime();
     ForkJoinPool pool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
     int [] sortedArray = pool.invoke(new ParallelMergeSort(randomArray));
     long endTime = System.nanoTime();
-    long duration = ((endTime - startTime)/1000000);
-    System.out.println("Time taken: " + duration + " milliseconds");
-    System.out.println(Arrays.toString(sortedArray));
-
+    long duration = ((endTime - startTime));
     pool.close();
+    if (size <=1){
+      return;
+    }
+    else{
+      System.out.println("Time taken: " + duration + " milliseconds");
+    }
+    
+    
+  }
+  public static void main(String [] args){
+    ParallelMergeSort pms = new ParallelMergeSort(new int[0]);
+    pms.randomArrayandMerge(1);
+    pms.randomArrayandMerge(10);
+    pms.randomArrayandMerge(100);
+    pms.randomArrayandMerge(1000);
+    pms.randomArrayandMerge(10000);
+    pms.randomArrayandMerge(100000);
+    pms.randomArrayandMerge(1000000);
+    pms.randomArrayandMerge(10000000);
+    pms.randomArrayandMerge(100000000);
   }
 }
