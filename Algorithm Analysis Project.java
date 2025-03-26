@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Random;
 import java.util.concurrent.RecursiveTask;
 import java.util.concurrent.ForkJoinPool;
 
@@ -33,7 +34,7 @@ class ParallelMergeSort extends RecursiveTask<int[]>{
     int [] merged = new int [left.length + right.length];
     int i = 0, j = 0, k = 0;
 
-while (i < left.length && j < right.length) {
+  while (i < left.length && j < right.length) {
             merged[k++] = (left[i] < right[j]) ? left[i++] : right[j++];
         }
 
@@ -45,9 +46,16 @@ while (i < left.length && j < right.length) {
 
   public static void main(String [] args){
     int [] myArray = {3, 6, 8, 10, 1, 2, 1};
+    int size = 100000; // Define the size of the array
+        int[] randomArray = new int[size]; // Create an array of the specified size
+        Random random = new Random();
+// Fill the array with random integers
+        for (int i = 0; i < size; i++) {
+            randomArray[i] = random.nextInt(100); // Generates random integers between 0 (inclusive) and 100 (exclusive)
+        }
     long startTime = System.nanoTime();
     ForkJoinPool pool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
-    int [] sortedArray = pool.invoke(new ParallelMergeSort(myArray));
+    int [] sortedArray = pool.invoke(new ParallelMergeSort(randomArray));
     long endTime = System.nanoTime();
     long duration = ((endTime - startTime)/1000000);
     System.out.println("Time taken: " + duration + " milliseconds");
